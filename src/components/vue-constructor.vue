@@ -1,8 +1,8 @@
 <script>
 import Pagetitle from "@/components/elements/vue-pagetitle.vue";
-import Products from "@/components/elements/vue-products.vue";
-import Canvas from "@/components/elements/vue-canvas.vue";
-import Form from "@/components/elements/vue-form.vue";
+import Products from "@/components/vue-products.vue";
+import Canvas from "@/components/vue-canvas.vue";
+import Form from "@/components/vue-form.vue";
 
 export default {
   name: "Section",
