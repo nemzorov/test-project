@@ -1,13 +1,14 @@
 <script>
 export default {
   name: "Pagetitle",
+  props: ["pagetitle", "subtitle"],
 };
 </script>
 
 <template>
   <div class="pagetitle">
-    <h2>Откройте <span>больше возможностей</span> «Крестьянки»</h2>
-    <p>Вместе с полезными дополнениями</p>
+    <h2>{{ pagetitle }}</h2>
+    <p v-if="subtitle">{{ subtitle }}</p>
   </div>
 </template>
 

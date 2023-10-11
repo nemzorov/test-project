@@ -1,11 +1,17 @@
 <script>
-import Section from "@/components/vue-section.vue";
+import Constructor from "@/components/vue-constructor.vue";
 export default {
   name: "App",
-  components: { Section },
+  components: { Constructor },
+  data() {
+    return {
+      pagetitle: "Откройте больше возможностей «Крестьянки»",
+      subitle: "Вместе с полезными дополнениями",
+    };
+  },
 };
 </script>
 
 <template>
-  <Section />
+  <Constructor v-bind:section="{ pagetitle, subitle }" />
 </template>
