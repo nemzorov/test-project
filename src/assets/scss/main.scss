@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: "Roboto", "Arial", sans-serif;
+    min-width: 320px;
+    max-width: 1920px;
+}
+
+section {
+    padding: $sectionPadding 0;
+}
+
+.container {
+    width: 100%;
+    padding: 0 $containerPadding;
+    margin: 0 auto;
+}
+
+$breakpoints: (
+    (sm, 576px, 516px),
+    (md, 768px, 696px),
+    (lg, 992px, 936px),
+    (xl, 1200px, 1116px),
+    (xxl, 1400px, 1420px),
+);
+
+
+@each $breakpoint,
+$width,
+$maw in $breakpoints {
+    @media (min-width: $width) {
+        .container {
+            max-width: $maw;
+        }
+    }
+}
