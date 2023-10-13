@@ -17,10 +17,15 @@ export default {
 
 .pagetitle {
   text-align: center;
+  font-size: $sizePagetitle;
+
+  @media (min-width: 1201px) {
+    font-size: 3.25rem;
+  }
+
   h1,
   h2 {
     font-weight: 700;
-    font-size: $sizePagetitle;
     text-transform: uppercase;
     margin-bottom: 0.4em;
   }
@@ -30,7 +35,7 @@ export default {
   }
 
   p {
-    font-size: $sizeSubtitle;
+    font-size: 0.615em;
   }
 }
 </style>

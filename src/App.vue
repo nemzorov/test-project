@@ -1,17 +1,17 @@
 <script>
 import Constructor from "@/components/vue-constructor.vue";
+import Store from "@/store.js";
 export default {
   name: "App",
   components: { Constructor },
   data() {
     return {
-      pagetitle: "Откройте больше возможностей «Крестьянки»",
-      subitle: "Вместе с полезными дополнениями",
+      data: Store.getData(),
     };
   },
 };
 </script>
 
 <template>
-  <Constructor v-bind:section="{ pagetitle, subitle }" />
+  <Constructor v-bind:data="data" />
 </template>
