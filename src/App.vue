@@ -1,6 +1,6 @@
 <script>
-import Constructor from "@/components/vue-constructor.vue";
-import Store from "@/store.js";
+import Constructor from "@/components/Constructor.vue";
+import Store from "@/api/store.js";
 export default {
   name: "App",
   components: { Constructor },
@@ -13,5 +13,5 @@ export default {
 </script>
 
 <template>
-  <Constructor v-bind:data="data" />
+  <Constructor :data="data" />
 </template>

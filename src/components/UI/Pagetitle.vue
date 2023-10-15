@@ -1,20 +1,23 @@
 <script>
 export default {
   name: "Pagetitle",
-  props: ["pagetitle", "subtitle"],
+  props: {
+    parametrs: {
+      type: Object,
+    },
+  },
 };
 </script>
 
 <template>
   <div class="pagetitle">
-    <h2>{{ pagetitle }}</h2>
-    <p v-if="subtitle">{{ subtitle }}</p>
+    <h2>{{ parametrs.pagetitle }}</h2>
+    <p v-if="parametrs.subtitle">{{ parametrs.subtitle }}</p>
   </div>
 </template>
 
 <style lang="scss">
 @import "@/assets/scss/vars.scss";
-
 .pagetitle {
   text-align: center;
   font-size: $sizePagetitle;

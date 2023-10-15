@@ -1,9 +1,10 @@
 <script>
-import ButtonSubmit from "@/components/vue-button-submit.vue";
-import Field from "@/components/vue-field.vue";
+import Button from "@/components/UI/Button.vue";
+import Input from "@/components/UI/Input.vue";
+import Checkbox from "@/components/UI/Checkbox.vue";
 export default {
   name: "Form",
-  components: { ButtonSubmit, Field },
+  components: { Button, Input, Checkbox },
   props: {
     products: {
       type: Object,
@@ -21,39 +22,46 @@ export default {
       <div class="form__price">11 000 ₽</div>
     </div>
     <div class="form__form">
-      <div class="form__fields">
-        <Field
-          v-bind:parametrs="{
-            name: 'text',
-            type: 'text',
-            id: 21,
-            label: 'Имя',
-            required: true,
-          }"
-        />
-        <Field
-          v-bind:parametrs="{
-            name: 'phone',
-            type: 'tel;',
-            id: 22,
-            label: 'Телефон',
-            required: true,
-          }"
-        />
-      </div>
+      <Input
+        :parametrs="{
+          name: 'text',
+          type: 'text',
+          id: 21,
+          label: 'Имя',
+          required: false,
+        }"
+      />
+      <Input
+        :parametrs="{
+          name: 'phone',
+          type: 'tel;',
+          id: 22,
+          label: 'Телефон',
+          required: true,
+        }"
+      />
       <div class="form__text">
         Менеджеры свяжутся с вами в<br />
         ближайшее время для<br />
         уточнения деталей заказа
       </div>
-      <div class="form__installment"></div>
-      <ButtonSubmit v-bind:title="'Заказать'" />
+      <div class="form__installment">
+        <Checkbox
+          :parametrs="{
+            name: 'installment',
+            id: 'installment',
+            label: 'Покупка в рассрочку',
+          }"
+        />
+      </div>
+      <Button :parametrs="{ title: 'Заказать' }" />
     </div>
   </div>
 </template>
 
 <style lang="scss">
 @import "@/assets/scss/vars.scss";
+
 .form {
   padding: 3.125em 1.876em;
   border-radius: $borderRadius;
@@ -68,10 +76,18 @@ export default {
     font-weight: 700;
     text-align: center;
   }
+
   &__price {
     @extend .form__title;
     font-size: 3.125em;
   }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125em;
+  }
+
   &__text {
     font-size: 1.125em;
     text-align: center;

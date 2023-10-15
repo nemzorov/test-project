@@ -1,17 +1,17 @@
 <script>
-import Pagetitle from "@/components/vue-pagetitle.vue";
-import Subproducts from "@/components/vue-subproducts.vue";
-import Canvas from "@/components/vue-canvas.vue";
-import Form from "@/components/vue-form.vue";
+import Pagetitle from "@/components/UI/Pagetitle.vue";
+import ProductList from "@/components/ProductList.vue";
+import ProductImage from "@/components/ProductImage.vue";
+import Form from "@/components/Form.vue";
 
 export default {
-  name: "Section",
+  name: "Constructor",
   props: {
     data: {
       type: Object,
     },
   },
-  components: { Pagetitle, Subproducts, Canvas, Form },
+  components: { Pagetitle, ProductList, ProductImage, Form },
 };
 </script>
 
@@ -20,15 +20,14 @@ export default {
     <div class="container">
       <Pagetitle
         v-if="data.pagetitle"
-        v-bind:pagetitle="data.pagetitle"
-        v-bind:subtitle="data.subitle"
+        :parametrs="{ pagetitle: data.pagetitle, subtitle: data.subitle }"
       />
       <div class="constructor__items">
-        <Subproducts
-          v-bind:subproducts="data.subproducts"
+        <ProductList
+          :productList="data.subproducts"
           class="constructor__item constructor__item_subproducts"
         />
-        <Canvas class="constructor__item constructor__item_img" />
+        <ProductImage class="constructor__item constructor__item_img" />
         <Form class="constructor__item constructor__item_form" />
       </div>
     </div>
@@ -43,6 +42,7 @@ export default {
   }
   &__items {
     display: flex;
+    justify-content: space-between;
     column-gap: $gapColumns;
     row-gap: $gap;
     flex-wrap: wrap;
@@ -59,6 +59,7 @@ export default {
     }
 
     &_form {
+      flex-grow: 0;
       @media (min-width: 993px) {
         min-width: 21.375rem;
       }

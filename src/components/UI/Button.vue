@@ -1,12 +1,16 @@
 <script>
 export default {
-  name: "ButtonSubmit",
-  props: ["title"],
+  name: "Button",
+  props: {
+    parametrs: {
+      type: Object,
+    },
+  },
 };
 </script>
 
 <template>
   <button @click.prevent="" class="button button_submit">
-    <span>{{ title }}</span>
+    <span>{{ parametrs.title }}</span>
   </button>
 </template>

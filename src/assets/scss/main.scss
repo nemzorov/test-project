@@ -4,6 +4,7 @@ body {
     font-family: "Roboto", "Arial", sans-serif;
     min-width: 320px;
     max-width: 1920px;
+    margin: 0 auto;
 }
 
 section {
@@ -67,11 +68,12 @@ section {
     }
 }
 
-.field {
+.input {
     position: relative;
     display: flex;
     flex-direction: column-reverse;
     line-height: 1.2;
+    font-size: 1.25rem;
 
     &__label {
         position: absolute;
@@ -86,37 +88,40 @@ section {
         transform-origin: left;
     }
 
-    &__input {
+    input {
         width: 100%;
         height: $inputHeight;
         padding: 0 20px;
-        border: 1px solid $colorBorder;
+        border: none;
         border-radius: $borderRadius;
         transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
         background-color: $colorBgLight;
+        outline: none;
+        padding-top: 1.125rem;
+        border-radius: 3px;
+        font-size: inherit;
 
-        &:focus {
-            &~.field__label {
-                transform: translateY(-11px) scale(0.75);
-            }
-
-            &:not([readonly]) {
-                border-color: $colorPrimary;
-                box-shadow: 0 0 0 4px $colorPrimary;
-                background-color: $colorBg;
+        &:focus,
+        &:not(:placeholder-shown) {
+            &~.input__label {
+                transform: translateY(-0.55em) scale(0.75);
             }
         }
 
         &.required {
-            &~.field__label {
+            &~.input__label {
                 &::after {
                     content: '*';
-                    margin-left: 0.1em;
+                    margin-left: 0.25em;
+                    color: red;
                 }
             }
         }
     }
 }
+
+
+
 
 .hover-underline {
     --color: currentColor;

@@ -1,22 +1,22 @@
 <script>
-import Subproduct from "@/components/vue-subproduct.vue";
+import ProductItem from "@/components/ProductItem.vue";
 export default {
-  name: "Subproducts",
+  name: "ProductList",
   props: {
-    subproducts: {
+    productList: {
       type: Object,
     },
   },
-  components: { Subproduct },
+  components: { ProductItem },
 };
 </script>
 
 <template>
-  <div class="subproducts">
-    <div class="subproducts__items">
-      <Subproduct
-        v-for="subproduct in subproducts"
-        v-bind:subproduct="subproduct"
+  <div class="product-list">
+    <div class="product-list__items">
+      <ProductItem
+        v-for="subproduct in productList"
+        :productItem="subproduct"
       />
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/vars.scss";
-.subproducts {
+.product-list {
   background: $colorBgLight;
   border-radius: $borderRadius;
   padding: 1.25rem;
