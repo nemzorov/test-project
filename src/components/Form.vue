@@ -95,9 +95,15 @@ export default {
     color: $colorTextMuted;
   }
 
-  .checkbox__icon {
-    border-width: 1px;
-    font-size: 0.85rem;
+  .checkbox {
+    &__icon {
+      border-width: 1px;
+      font-size: 0.85rem;
+    }
+
+    label {
+      justify-content: center;
+    }
   }
 }
 </style>

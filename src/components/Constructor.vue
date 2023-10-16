@@ -27,7 +27,11 @@ export default {
           :productList="data.subproducts"
           class="constructor__item constructor__item_subproducts"
         />
-        <ProductImage class="constructor__item constructor__item_img" />
+        <ProductImage
+          class="constructor__item constructor__item_img"
+          :subproducts="data.subproducts"
+          :products="data.products"
+        />
         <Form
           :options="data.products"
           class="constructor__item constructor__item_form"
