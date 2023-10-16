@@ -1,6 +1,8 @@
 <script>
+import RadioInput from "@/components/UI/RadioInput.vue";
 export default {
   name: "ProductItem",
+  components: { RadioInput },
   props: {
     productItem: {
       type: Object,
@@ -12,11 +14,14 @@ export default {
 <template>
   <div class="product-item">
     <div class="product-item__content hover-underline">
-      <input :id="`prod${productItem.id}`" type="checkbox" />
-      <label :for="`prod${productItem.id}`">
-        <img :src="productItem.img" :alt="productItem.name" />
-        <span>{{ productItem.name }}</span>
-      </label>
+      <RadioInput
+        :parametrs="{
+          id: `prod${productItem.id}`,
+          type: 'checkbox',
+          name: productItem.name,
+          img: productItem.img,
+        }"
+      />
     </div>
 
     <div class="product-item__price">
