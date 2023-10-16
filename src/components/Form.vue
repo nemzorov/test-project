@@ -6,9 +6,19 @@ import Select from "@/components/UI/Select.vue";
 export default {
   name: "Form",
   components: { Button, Input, Checkbox, Select },
+  data() {
+    return {
+      comments: "",
+    };
+  },
   props: {
     options: {
       type: Object,
+    },
+  },
+  methods: {
+    checkedToggle(props) {
+      this.comments = props.checked ? props.label : "";
     },
   },
 };
@@ -22,7 +32,15 @@ export default {
       <div class="form__title">Итого:</div>
       <div class="form__price">11 000 ₽</div>
     </div>
-    <div class="form__form">
+    <form
+      @submit.prevent="
+        $emit('open-popup', {
+          title: 'Благодарим за заказ!',
+          text: 'Менеджер уже получил Ваше сообщение, он свяжется с Вами в течение 10 минут',
+        })
+      "
+      class="form__form"
+    >
       <Input
         :parametrs="{
           name: 'text',
@@ -48,6 +66,7 @@ export default {
       </div>
       <div class="form__installment">
         <Checkbox
+          @checked="checkedToggle"
           :parametrs="{
             name: 'installment',
             id: 'installment',
@@ -55,8 +74,9 @@ export default {
           }"
         />
       </div>
-      <Button :parametrs="{ title: 'Заказать' }" />
-    </div>
+      <Button :parametrs="{ title: 'Заказать', type: 'submit' }" />
+      <input type="hidden" class="comments" name="comments" :value="comments" />
+    </form>
   </div>
 </template>
 
@@ -99,6 +119,7 @@ export default {
     &__icon {
       border-width: 1px;
       font-size: 0.85rem;
+      border-radius: 4px;
     }
 
     label {

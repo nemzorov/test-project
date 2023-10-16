@@ -16,6 +16,7 @@ export default {
       :name="parametrs.name"
       :type="parametrs.type"
       :class="parametrs.required ? 'required' : ''"
+      :required="!!parametrs.required"
     />
     <div class="input__label">{{ parametrs.label }}</div>
   </label>

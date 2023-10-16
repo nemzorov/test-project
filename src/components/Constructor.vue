@@ -11,6 +11,11 @@ export default {
       type: Object,
     },
   },
+  methods: {
+    openPopup(parametrs) {
+      this.$emit("popup-open", parametrs);
+    },
+  },
   components: { Pagetitle, ProductList, ProductImage, Form },
 };
 </script>
@@ -33,6 +38,7 @@ export default {
           :products="data.products"
         />
         <Form
+          @open-popup="openPopup"
           :options="data.products"
           class="constructor__item constructor__item_form"
         />

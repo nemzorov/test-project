@@ -52,7 +52,7 @@ export default {
   }
 
   .checkbox {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 }
 </style>

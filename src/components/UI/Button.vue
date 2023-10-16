@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-  <button @click.prevent="" class="button button_submit">
+  <button :type="parametrs.type" class="button button_submit">
     <span>{{ parametrs.title }}</span>
   </button>
 </template>

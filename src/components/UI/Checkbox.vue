@@ -6,6 +6,20 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      checked: false,
+    };
+  },
+  methods: {
+    changeCheckbox() {
+      this.checked = !this.checked;
+      this.$emit("checked", {
+        checked: this.checked,
+        label: this.parametrs.label,
+      });
+    },
+  },
 };
 </script>
 
@@ -13,7 +27,12 @@ export default {
   <div class="checkbox">
     <label :for="parametrs.id">
       <div class="checkbox__icon">
-        <input type="checkbox" :name="parametrs.name" :id="parametrs.id" />
+        <input
+          @change="changeCheckbox"
+          type="checkbox"
+          :name="parametrs.name"
+          :id="parametrs.id"
+        />
         <div class="checkbox__checked"></div>
       </div>
       <img v-if="parametrs.img" :src="parametrs.img" :alt="parametrs.name" />
@@ -31,6 +50,8 @@ export default {
     border: 3px solid $colorBorder;
     border-radius: 50%;
     position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 
   &__checked {
@@ -38,8 +59,8 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 1em;
-    height: 1em;
+    width: 0.9em;
+    height: 0.9em;
     background: transparent;
     border-radius: inherit;
     pointer-events: none;
