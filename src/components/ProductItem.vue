@@ -1,8 +1,8 @@
 <script>
-import RadioInput from "@/components/UI/RadioInput.vue";
+import Checkbox from "@/components/UI/Checkbox.vue";
 export default {
   name: "ProductItem",
-  components: { RadioInput },
+  components: { Checkbox },
   props: {
     productItem: {
       type: Object,
@@ -14,21 +14,24 @@ export default {
 <template>
   <div class="product-item">
     <div class="product-item__content hover-underline">
-      <RadioInput
+      <Checkbox
         :parametrs="{
           id: `prod${productItem.id}`,
-          type: 'checkbox',
-          name: productItem.name,
+          name: 'prod-item',
+          label: productItem.name,
           img: productItem.img,
         }"
       />
     </div>
 
-    <div class="product-item__price">
-      <div v-if="productItem.price.old" class="product-item__price-old">
+    <div class="product-item__price-wrapp">
+      <div
+        v-if="productItem.price.old"
+        class="product-item__price product-item__price_old"
+      >
         {{ productItem.price.old }} {{ productItem.price.currency }}
       </div>
-      <div class="product-item__price-current">
+      <div class="product-item__price product-item__price_current">
         {{ productItem.price.current }} {{ productItem.price.currency }}
       </div>
     </div>
@@ -40,20 +43,16 @@ export default {
   display: flex;
   justify-content: space-between;
 
-  &__content {
-    display: flex;
-    gap: 0.625em;
-    align-items: center;
-    cursor: pointer;
+  &__price {
+    white-space: nowrap;
+
+    &_old {
+      text-decoration: line-through;
+    }
   }
-  img {
-    width: auto;
-    object-fit: contain;
-    object-position: center;
-    max-height: 50px;
-  }
-  label {
-    @extend .product-item__content;
+
+  .checkbox {
+    font-size: 1.125rem;
   }
 }
 </style>

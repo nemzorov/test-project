@@ -2,11 +2,12 @@
 import Button from "@/components/UI/Button.vue";
 import Input from "@/components/UI/Input.vue";
 import Checkbox from "@/components/UI/Checkbox.vue";
+import Select from "@/components/UI/Select.vue";
 export default {
   name: "Form",
-  components: { Button, Input, Checkbox },
+  components: { Button, Input, Checkbox, Select },
   props: {
-    products: {
+    options: {
       type: Object,
     },
   },
@@ -16,7 +17,7 @@ export default {
 <template>
   <div class="form">
     <div class="form__title">Заказ</div>
-    <div class="form__select"></div>
+    <Select :options="options" />
     <div class="form__result">
       <div class="form__title">Итого:</div>
       <div class="form__price">11 000 ₽</div>
@@ -92,6 +93,11 @@ export default {
     font-size: 1.125em;
     text-align: center;
     color: $colorTextMuted;
+  }
+
+  .checkbox__icon {
+    border-width: 1px;
+    font-size: 0.85rem;
   }
 }
 </style>

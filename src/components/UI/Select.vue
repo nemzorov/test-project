@@ -2,11 +2,22 @@
 export default {
   name: "Select",
   props: {
-    parametrs: {
+    options: {
       type: Object,
     },
+  },
+  data() {
+    return {
+      option: this.options[0]["name"],
+    };
   },
 };
 </script>
 
-<template></template>
+<template>
+  <select v-model="option">
+    <option v-for="option in options">{{ option.name }}</option>
+  </select>
+</template>
+
+<style lang="scss"></style>
