@@ -2,9 +2,26 @@
 import ProductItem from "@/components/ProductItem.vue";
 export default {
   name: "ProductList",
+  data() {
+    return {
+      subproducts: [],
+    };
+  },
   props: {
     productList: {
       type: Object,
+    },
+  },
+  methods: {
+    changeForm(props) {
+      if (props.checked) {
+        this.subproducts.push(props.item);
+      } else {
+        this.subproducts = this.subproducts.filter(
+          (el) => el.id !== props.item.id
+        );
+      }
+      this.$emit("prod-list", this.subproducts);
     },
   },
   components: { ProductItem },
@@ -15,6 +32,7 @@ export default {
   <div class="product-list">
     <div class="product-list__items">
       <ProductItem
+        @change-prod="changeForm"
         v-for="subproduct in productList"
         :productItem="subproduct"
       />

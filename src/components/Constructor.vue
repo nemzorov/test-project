@@ -6,14 +6,39 @@ import Form from "@/components/Form.vue";
 
 export default {
   name: "Constructor",
+  data() {
+    return {
+      product: {},
+      subproducts: undefined,
+      resultPrice: 0,
+    };
+  },
   props: {
     data: {
       type: Object,
     },
   },
   methods: {
-    openPopup(parametrs) {
-      this.$emit("popup-open", parametrs);
+    formSubmit(props) {
+      this.$emit("form-submit", props);
+    },
+    getSubprodList(list) {
+      this.subproducts = list;
+      this.calcPrice();
+    },
+    getProduct(product) {
+      this.product = product;
+      this.calcPrice();
+    },
+    calcPrice() {
+      let result = 0;
+      if (this.subproducts) {
+        this.subproducts.forEach((el) => {
+          result += el.price.current;
+        });
+      }
+      result += this.product.price.current;
+      this.resultPrice = result;
     },
   },
   components: { Pagetitle, ProductList, ProductImage, Form },
@@ -29,17 +54,21 @@ export default {
       />
       <div class="constructor__items">
         <ProductList
+          @prod-list="getSubprodList"
           :productList="data.subproducts"
           class="constructor__item constructor__item_subproducts"
         />
         <ProductImage
           class="constructor__item constructor__item_img"
-          :subproducts="data.subproducts"
-          :products="data.products"
+          :subproducts="subproducts"
+          :product="product"
         />
         <Form
-          @open-popup="openPopup"
+          @prod="getProduct"
+          @form-submit="formSubmit"
           :options="data.products"
+          :resultPrice="resultPrice"
+          :products="{ product, subproducts }"
           class="constructor__item constructor__item_form"
         />
       </div>

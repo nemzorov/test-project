@@ -2,6 +2,14 @@
 import Checkbox from "@/components/UI/Checkbox.vue";
 export default {
   name: "ProductItem",
+  methods: {
+    changeItem(props) {
+      this.$emit("change-prod", {
+        item: this.productItem,
+        checked: props.value,
+      });
+    },
+  },
   components: { Checkbox },
   props: {
     productItem: {
@@ -15,6 +23,7 @@ export default {
   <div class="product-item">
     <div class="product-item__content hover-underline">
       <Checkbox
+        @input-change="changeItem"
         :parametrs="{
           id: `prod${productItem.id}`,
           name: 'prod-item',

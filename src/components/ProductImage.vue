@@ -2,7 +2,7 @@
 export default {
   name: "ProductImage",
   props: {
-    products: {
+    product: {
       type: Object,
     },
     subproducts: {
@@ -16,9 +16,9 @@ export default {
   <div class="product-image">
     <div class="product-image__wrapper">
       <div class="product-image__main">
-        <img :src="products[0]['img']" />
+        <img :src="product.img" />
       </div>
-      <div class="product-image__items">
+      <div v-if="subproducts" class="product-image__items">
         <div v-for="subproduct in subproducts" class="product-image__item">
           <img :src="subproduct.img" />
         </div>

@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/vars.scss";
+
 .popup {
   position: fixed;
   width: 100%;

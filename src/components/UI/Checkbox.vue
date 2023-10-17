@@ -14,8 +14,9 @@ export default {
   methods: {
     changeCheckbox() {
       this.checked = !this.checked;
-      this.$emit("checked", {
-        checked: this.checked,
+      this.$emit("input-change", {
+        value: this.checked,
+        name: this.parametrs.name,
         label: this.parametrs.label,
       });
     },

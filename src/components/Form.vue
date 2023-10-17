@@ -8,49 +8,62 @@ export default {
   components: { Button, Input, Checkbox, Select },
   data() {
     return {
-      comments: "",
+      inputsValues: {
+        name: "",
+        phone: "",
+        installment: "",
+        product: this.products,
+      },
     };
   },
   props: {
     options: {
       type: Object,
     },
+    products: {
+      type: Object,
+    },
+    resultPrice: {
+      type: Number,
+    },
   },
   methods: {
-    checkedToggle(props) {
-      this.comments = props.checked ? props.label : "";
+    changeInputs(props) {
+      this.inputsValues[props.name] = props.value;
+    },
+    changeProduct(props) {
+      this.$emit("prod", props);
     },
   },
 };
 </script>
 
 <template>
-  <div class="form">
+  <form @submit.prevent="$emit('form-submit', { inputsValues })" class="form">
     <div class="form__title">Заказ</div>
-    <Select :options="options" />
+    <Select
+      :parametrs="{ options: options, label: 'Товар', name: 'product' }"
+      @product-change="changeProduct"
+    />
     <div class="form__result">
       <div class="form__title">Итого:</div>
-      <div class="form__price">11 000 ₽</div>
+      <div class="form__price">
+        <span>{{ resultPrice }}</span> ₽
+      </div>
     </div>
-    <form
-      @submit.prevent="
-        $emit('open-popup', {
-          title: 'Благодарим за заказ!',
-          text: 'Менеджер уже получил Ваше сообщение, он свяжется с Вами в течение 10 минут',
-        })
-      "
-      class="form__form"
-    >
+    <div class="form__form">
       <Input
+        @input-change="changeInputs"
         :parametrs="{
-          name: 'text',
+          name: 'name',
           type: 'text',
           id: 21,
           label: 'Имя',
-          required: false,
+          required: true,
         }"
       />
       <Input
+        @input-change="changeInputs"
         :parametrs="{
           name: 'phone',
           type: 'tel;',
@@ -66,7 +79,7 @@ export default {
       </div>
       <div class="form__installment">
         <Checkbox
-          @checked="checkedToggle"
+          @input-change="changeInputs"
           :parametrs="{
             name: 'installment',
             id: 'installment',
@@ -75,9 +88,8 @@ export default {
         />
       </div>
       <Button :parametrs="{ title: 'Заказать', type: 'submit' }" />
-      <input type="hidden" class="comments" name="comments" :value="comments" />
-    </form>
-  </div>
+    </div>
+  </form>
 </template>
 
 <style lang="scss">

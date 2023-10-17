@@ -1,37 +1,49 @@
 <script>
 import Constructor from "@/components/Constructor.vue";
 import Popup from "@/components/UI/Popup.vue";
+import Loader from "@/components/UI/Loader.vue";
 import Store from "@/api/store.js";
+import API from "@/api/api.js";
 
 export default {
   name: "App",
-  components: { Constructor, Popup },
+  components: { Constructor, Popup, Loader },
   data() {
     return {
       data: Store.getData(),
       popup: {
-        idOpen: false,
-        data: {},
+        isOpen: false,
+        data: {
+          title: 'Благодарим за заказ!',
+          text: 'Менеджер уже получил Ваше сообщение, он свяжется с Вами в течение 10 минут',
+        },
       },
+      loader: {
+        isOpen: false,
+      }
     };
   },
   methods: {
-    openPopup(parametrs) {
-      this.popup.idOpen = true;
-      this.popup.data = parametrs;
-      document.body.classList.add('open-popup');
+    openPopup() {
+      this.popup.isOpen = true;
     },
     closePopup() {
-      this.popup.idOpen = false;
-      this.popup.data = {};
-      document.body.classList.remove('open-popup');
+      this.popup.isOpen = false;
+    },
+    formSubmit(props) {
+      this.loader.isOpen = true;
+      API.submitForm(props).then((data)=>{
+        this.loader.isOpen = false;
+        this.openPopup();
+        console.log('Форма отправлена', data);
+      });
     }
   }
 };
 </script>
 
 <template>
-  <Constructor :data="data" @popup-open="openPopup" />
-  <Popup v-if="popup.idOpen" :parametrs="popup.data" @close-popup="closePopup"/>
+  <Constructor :data="data" @form-submit="formSubmit" />
+  <Popup v-if="popup.isOpen" :parametrs="popup.data" @close-popup="closePopup"/>
+  <Loader v-if="loader.isOpen"/>
 </template>
-
