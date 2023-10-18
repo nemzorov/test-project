@@ -23,6 +23,9 @@ export default {
       }
       this.$emit("prod-list", this.subproducts);
     },
+    successClear() {
+      this.subproducts = [];
+    },
   },
   components: { ProductItem },
 };
@@ -32,6 +35,8 @@ export default {
   <div class="product-list">
     <div class="product-list__items">
       <ProductItem
+        ref="prodItem"
+        @clear-success="successClear"
         @change-prod="changeForm"
         v-for="subproduct in productList"
         :productItem="subproduct"

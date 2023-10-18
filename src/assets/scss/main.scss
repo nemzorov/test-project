@@ -119,11 +119,14 @@ select {
         font-size: inherit;
 
         &:focus,
-        &:not(:placeholder-shown) {
+        &:not(:placeholder-shown),
+        &.phone {
             &~.input__label {
                 transform: translateY(-0.55em) scale(0.75);
             }
         }
+
+
 
         &.required {
             &~.input__label {

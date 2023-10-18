@@ -9,12 +9,7 @@ export default {
   data() {
     return {
       comment: "",
-      inputsValues: {
-        name: "",
-        phone: "",
-        installment: "",
-        product: this.products,
-      },
+      inputsValues: {},
     };
   },
   props: {
@@ -39,19 +34,36 @@ export default {
       if (props.name === "installment") {
         this.addComment(props);
       }
-      this.inputsValues[props.name] = props.value;
+      this.inputsValues[props.label] = props.value;
     },
     changeProduct(props) {
       this.$emit("prod", props);
+    },
+    submitForm() {
+      this.inputsValues["Товар"] = this.products.product.name;
+      if (this.products.subproducts) {
+        this.inputsValues["Доп. товары"] = this.products.subproducts.map(
+          (e) => e.name
+        );
+      }
+      this.$emit("form-submit", this.inputsValues);
+      this.$emit("clear-form");
+      this.clearForm();
+    },
+    clearForm() {
+      for (const val in this.$refs) {
+        this.$refs[val].clearVal();
+      }
     },
   },
 };
 </script>
 
 <template>
-  <form @submit.prevent="$emit('form-submit', { inputsValues })" class="form">
+  <form @submit.prevent="submitForm" class="form">
     <div class="form__title">Заказ</div>
     <Select
+      ref="inputSelect"
       :parametrs="{ options: options, label: 'Товар', name: 'product' }"
       @product-change="changeProduct"
     />
@@ -63,6 +75,7 @@ export default {
     </div>
     <div class="form__form">
       <Input
+        ref="inputName"
         @input-change="changeInputs"
         :parametrs="{
           name: 'name',
@@ -73,6 +86,7 @@ export default {
         }"
       />
       <Input
+        ref="inputPhone"
         @input-change="changeInputs"
         :parametrs="{
           name: 'phone',
@@ -89,6 +103,7 @@ export default {
       </div>
       <div class="form__installment">
         <Checkbox
+          ref="inputInstallment"
           @input-change="changeInputs"
           :parametrs="{
             name: 'installment',

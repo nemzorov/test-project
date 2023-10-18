@@ -9,6 +9,9 @@ export default {
         checked: props.value,
       });
     },
+    successClear() {
+      this.$emit("clear-success");
+    },
   },
   components: { Checkbox },
   props: {
@@ -23,7 +26,9 @@ export default {
   <div class="product-item">
     <div class="product-item__content hover-underline">
       <Checkbox
+        ref="prodItemCheckbox"
         @input-change="changeItem"
+        @clear-success="successClear"
         :parametrs="{
           id: `prod${productItem.id}`,
           name: 'prod-item',

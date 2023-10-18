@@ -11,7 +11,7 @@ export default {
 
 <template>
   <div class="pagetitle">
-    <h2>{{ parametrs.pagetitle }}</h2>
+    <h2 v-html="parametrs.pagetitle"></h2>
     <p v-if="parametrs.subtitle">{{ parametrs.subtitle }}</p>
   </div>
 </template>

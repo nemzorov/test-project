@@ -40,6 +40,17 @@ export default {
       result += this.product.price.current;
       this.resultPrice = result;
     },
+    clear() {
+      this.product = this.data.products[0];
+      this.subproducts = undefined;
+      this.resultPrice = this.data.products[0].price.current;
+
+      for (const item in this.$refs.ProductList.$refs.prodItem) {
+        this.$refs.ProductList.$refs.prodItem[
+          item
+        ].$refs.prodItemCheckbox.clearVal();
+      }
+    },
   },
   components: { Pagetitle, ProductList, ProductImage, Form },
 };
@@ -54,16 +65,20 @@ export default {
       />
       <div class="constructor__items">
         <ProductList
+          ref="ProductList"
           @prod-list="getSubprodList"
           :productList="data.subproducts"
           class="constructor__item constructor__item_subproducts"
         />
         <ProductImage
+          ref="ProductImage"
           class="constructor__item constructor__item_img"
           :subproducts="subproducts"
           :product="product"
         />
         <Form
+          @clear-form="clear"
+          ref="Form"
           @prod="getProduct"
           @form-submit="formSubmit"
           :options="data.products"

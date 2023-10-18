@@ -20,6 +20,10 @@ export default {
         label: this.parametrs.label,
       });
     },
+    clearVal() {
+      this.checked = false;
+      this.$emit("clear-success");
+    },
   },
 };
 </script>
@@ -33,6 +37,7 @@ export default {
           type="checkbox"
           :name="parametrs.name"
           :id="parametrs.id"
+          :checked="!!checked"
         />
         <div class="checkbox__checked"></div>
       </div>

@@ -21,6 +21,9 @@ export default {
       this.option = props;
       this.productChange(this.option);
     },
+    clearVal() {
+      this.option = this.parametrs.options[0];
+    },
   },
   mounted() {
     this.productChange(this.option);
