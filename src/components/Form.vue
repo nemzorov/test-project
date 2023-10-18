@@ -8,6 +8,7 @@ export default {
   components: { Button, Input, Checkbox, Select },
   data() {
     return {
+      comment: "",
       inputsValues: {
         name: "",
         phone: "",
@@ -28,7 +29,16 @@ export default {
     },
   },
   methods: {
+    addComment(props) {
+      // Метод для добовления "Покупка в рассрочку" в скрытый инпут comment.
+      // Но в целом у меня все данные после отправки попадают в inputsValues
+      // Этот метод сделал следую ТЗ
+      this.comment = props.value ? props.label : "";
+    },
     changeInputs(props) {
+      if (props.name === "installment") {
+        this.addComment(props);
+      }
       this.inputsValues[props.name] = props.value;
     },
     changeProduct(props) {
@@ -89,6 +99,7 @@ export default {
       </div>
       <Button :parametrs="{ title: 'Заказать', type: 'submit' }" />
     </div>
+    <input type="hidden" class="comment" name="comment" :value="comment" />
   </form>
 </template>
 

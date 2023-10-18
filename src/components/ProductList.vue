@@ -50,7 +50,9 @@ export default {
   &__items {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: $gapColumns;
+    height: 100%;
   }
 }
 </style>

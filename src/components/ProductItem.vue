@@ -48,15 +48,26 @@ export default {
 </template>
 
 <style lang="scss">
+@import "@/assets/scss/vars.scss";
 .product-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $colorBorder;
+  padding-bottom: 1.375em;
+  gap: 3em;
 
   &__price {
     white-space: nowrap;
+    text-align: right;
+
+    &_current {
+      font-weight: 700;
+    }
 
     &_old {
       text-decoration: line-through;
+      font-size: 0.875em;
     }
   }
 

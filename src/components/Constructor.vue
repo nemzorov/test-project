@@ -97,7 +97,7 @@ export default {
     }
 
     &_subproducts {
-      flex-basis: 26.5rem;
+      max-width: 26.7rem;
     }
 
     &_form {
